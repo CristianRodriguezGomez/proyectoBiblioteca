@@ -1,0 +1,148 @@
+<div class="bodyLoginadmin" >
+    <!DOCTYPE html>
+    <html>
+
+
+    <head>
+        <meta charset="utf-8" />
+        <link href="usuarios.component.css" rel="stylesheet" type="text/css" />
+    </head>
+
+    </html>
+    <div *ngIf="this.rol==1">
+
+        <nav>
+            <div class="nav-wrapperadmin">
+                <a class="brand-logo" class="material-icons prefix">USUARIOS person</a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+
+                    
+                    <li> <a (click)="regresar()"
+                            class="btn-large waves-effect waves-heavy orange lighten-2 modal-trigger"
+                            class="material-icons prefix">home</a></li>
+                    <li><a data-target="modalUsuarios2"
+                            class="btn-large waves-effect waves-heavy  green darken-2 modal-trigger"
+                            (click)="agregarNuevoUsuario(usuario)">AGREGAR USUARIO</a>
+
+                    </li>
+
+                </ul>
+            </div>
+
+
+        </nav>
+
+        <table class="centered">
+
+
+
+            <tr>
+                <th>ID</th>
+                <th>EMAIL</th>
+                <th>NOMBRE</th>
+                <th>TELEFONO</th>
+                <th>ROL</th>
+                <th>ACCIONES</th>
+            </tr>
+            <tr *ngFor="let usuario of usuarios |paginate: {itemsPerPage: pageSize,currentPage: p};let i=index">
+                <td> {{usuario.id}}</td>
+                <td>{{usuario.email}}</td>
+                <td>{{usuario.nombre}}</td>
+                <td>{{usuario.telefono}}</td>
+                <td>{{usuario.rol}}</td>
+                <td><a class="btn modal-trigger" (click)="eliminarUsuario(usuario.id)"><i
+                            class="material-icons prefix">delete</i></a>
+                    <a data-target="modalUsuarios1" class="btn modal-trigger" (click)="editarUsuario(usuario.id)"><i
+                            class="material-icons prefix">edit</i></a>
+                </td>
+
+
+            </tr>
+
+        </table>
+       
+      
+            <style>
+                .my-pagination ::ng-deep .ngx-pagination  {
+                  background: linear-gradient(rgb(108, 163, 195),rgb(108, 163, 195));
+                }
+                .my-pagination ::ng-deep .ngx-pagination .current{
+                    background-color: rgb(108, 163, 195);
+                  color: black;
+                }
+                </style>
+        <div class="center-align" id="paginacion">
+            <pagination-controls class="my-pagination" (pageChange)="p = ($event)" previousLabel="Anterior"
+                nextLabel="Siguiente" >
+            </pagination-controls>
+        </div>
+
+
+
+        <div id="modalUsuarios2" class="modal">
+            <div class="modal-content">
+                <h4>DATOS DEL USUARIO A INGRESAR</h4>
+                <div class="input-field">
+                    EMAIL:
+                    <input [(ngModel)]="usuario.email" type="text"><label for=""></label>
+                </div>
+                <div class="input-field">
+                    NOMBRE:
+                    <input [(ngModel)]="usuario.nombre" type="text"><label for=""></label>
+                </div>
+
+                <div class="input-field">
+                    TELEFONO
+                    <input [(ngModel)]="usuario.telefono" type="text"><label for=""></label>
+                </div>
+                <div class="input-field">
+                    ROL:
+                    <input [(ngModel)]="usuario.rol" type="number"><label for=""></label>
+                </div>
+                <div class="input-field">
+                    CONTRASEÑA:
+                    <input [(ngModel)]="usuario.password" type="text"><label for=""></label>
+                </div>
+
+                <div class="modal-footer">
+                    <a class="btn col l12 s12 m12 btnLogin modal-close " (click)="agregarUsuario()">INSERTAR </a>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div id="modalUsuarios1" class="modal">
+            <div class="modal-content">
+                <h4>DATOS DEL USUARIO A EDITAR</h4>
+                <div class="input-field">
+                    EMAIL:
+                    <input [(ngModel)]="usuario.email" type="text"><label for=""></label>
+                </div>
+                <div class="input-field">
+                    NOMBRE:
+                    <input [(ngModel)]="usuario.nombre" type="text"><label for=""></label>
+                </div>
+
+                <div class="input-field">
+                    TELEFONO:
+                    <input [(ngModel)]="usuario.telefono" type="text"><label for=""></label>
+                </div>
+                <div class="input-field">
+                    ROL:
+                    <input [(ngModel)]="usuario.rol" type="number"><label for=""></label>
+                </div>
+                <!--<div class="input-field">
+            CONTRASEÑA:
+            <input [(ngModel)]="usuario.password" type="text"><label for=""></label>
+        </div>
+      -->
+
+                <div class="modal-footer">
+                    <a (click)="actualizarUsuario()" class="btn col l12 s12 m12 btnLogin modal-close">ACTUALIZAR</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

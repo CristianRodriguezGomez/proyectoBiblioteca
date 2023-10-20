@@ -1,0 +1,52 @@
+<div class="bodyLogin">
+  <!DOCTYPE html>
+  <html>
+  
+  
+  <head>
+      <meta charset="utf-8" />
+      <link href="navigation.component.css" rel="stylesheet" type="text/css" />
+  </head>
+  
+  </html>
+ <!--Barra de navegación para Administrador--> 
+  <nav *ngIf="this.rol==1" class="page-navigation red lighten-2" max-width = auto>
+    
+    <div  class="nav-wrapper">
+      <!--<a class="brand-logo right"> ADMINISTRADOR</a>-->
+      <a  class="brand-logo right"> ADMINISTRADOR PERFIL</a>
+
+      <ul id="nav-mobile" class="left hide-on-med-and-down">
+        <li>  <a href="home/usuarios" >USUARIOS</a></li>
+        <li> <a href="home/estudiantes">ESTUDIANTES</a></li>
+        <li> <a href="home/carreras">LICENCIATURAS</a></li>
+        <li><a href="home/libros">LIBROS</a></li>
+        <li> <a href="home/prestamos">PRESTAMOS</a></li>
+        <li> <a  href="login"  (click)="salir()">CERRAR SESIÓN</a></li>
+        <li> <a href="home/perfil">PERFIL</a></li>
+
+  
+  
+      </ul>
+    </div>
+  </nav>
+
+  <!--Barra de navegación para Encargado--> 
+  <nav *ngIf="this.rol==2" max-width = auto>
+    
+    <div  class="nav-wrapper">
+      <a class="brand-logo right">ENCARGADO</a>
+      <ul id="nav-mobile" class="left hide-on-med-and-down">
+        <li> <a href="home/estudiantes">ESTUDIANTES</a></li>
+        <li><a href="home/libros">LIBROS</a></li>
+        <li> <a href="home/prestamos">PRESTAMOS</a></li>
+        <li> <a  href="login"  (click)="salir()">CERRAR SESIÓN</a></li>
+  
+  
+      </ul>
+    </div>
+  </nav>
+
+
+
+ 

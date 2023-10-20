@@ -1,0 +1,1408 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "REST API CONTROL Y MANEJO DE UNA BIBLIOTECA UNIVERSITARIA",
+        "description": "<html><body>Esta es la documentación de la API para el sistema de una biblioteca.<p>Para poder usar esta API es necesario solicitar el token y con esto poder utilizar los servicios proporcionados.</p><br><p><b>Autenticación y token de API</b></p><p>La Universidad Tecnológica de la Mixteca (UTM) proporciona el api-token. Una vez que haya creado y confirmado su  cuenta.</p></body></html>",
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "host": "localhost:3002",
+    "basePath": "",
+    "tags": [
+        {
+            "name": "Usuarios",
+            "description": "API para obtener información de los usuarios de la biblioteca"
+        },
+        {
+            "name": "Carreras",
+            "description": "API para obtener información de las carreras de la biblioteca"
+        },
+       
+        {
+            "name": "Estudiantes",
+            "description": "API para obtener información de los estudiantes que se registran en la biblioteca"
+        },
+        {
+            "name": "Libros",
+            "description": "API para obtener información de los libros que se prestan en la biblioteca "
+        },
+        {
+            "name": "Prestamos",
+            "description": "API para obtener información de los prestamos que se realizan en la biblioteca "
+        }
+    ],
+    "schemes": [
+        "http",
+        "https"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/api/usuarios": {
+            "get": {
+                "tags": [
+                    "Usuarios"
+                ],
+                "summary": "Listado de todos los usuarios que existen en la Biblioteca.",
+                "description": "<p>Servicio que devuelve la información detallada de todos los usuarios que existen en la Biblioteca.</p><p>&nbsp;</p><p><em><strong>¿Cuáles son los Usuarios?</strong></em></p>",
+                "responses": {
+                    "300": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "id": 5,
+                                    "email": "martinez@gmail.com",
+                                    "nombre": "Miguel Martinez Alegria",
+                                    "telefono": "951 345 67 34",
+                                    "rol": 2,
+                                    "password": "migue928"
+                                },
+                                {
+                                    "id": 35,
+                                    "email": "emma@gmail.com",
+                                    "nombre": "Emmanuel Martínez Alegría",
+                                    "telefono": "951 456 67 34",
+                                    "rol": 1,
+                                    "password": "emma123"
+                                },
+                                {
+                                    "id": 41,
+                                    "email": "cristiancitorod@gmail.com",
+                                    "nombre": "Cristian ",
+                                    "telefono": "9513425935",
+                                    "rol": 1,
+                                    "password": "cris123"
+                                },
+                                {
+                                    "id": 42,
+                                    "email": "gonzalez@gmail.com",
+                                    "nombre": "Dafne Jazzmin Gonzalez Días",
+                                    "telefono": "853 673 78 23",
+                                    "rol": 2,
+                                    "password": "dafne"
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Usuarios"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/carreras": {
+            "get": {
+                "tags": [
+                    "Carreras"
+                ],
+                "summary": "Listado de todos las carreras que existen en la Biblioteca.",
+                "description": "<p>Servicio que devuelve la información detallada de todos las carreras que existen en la Biblioteca.</p><p>&nbsp;</p><p><em><strong>¿Cuáles son las Carreras?</strong></em></p>",
+                "responses": {
+                    "300": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "id": 1,
+                                    "area": "Ingeniería en Computación"
+                                },
+                                {
+                                    "id": 2,
+                                    "area": "Ingeniería en Electrónica"
+                                },
+                                {
+                                    "id": 3,
+                                    "area": "Ingeniería en Diseño"
+                                },
+                                {
+                                    "id": 4,
+                                    "area": "Licenciatura en Ciencias Empresariales"
+                                },
+                                {
+                                    "id": 5,
+                                    "area": "Licenciatura en Matemáticas Aplicadas"
+                                },
+                                {
+                                    "id": 6,
+                                    "area": "Ingeniería en Alimentos"
+                                },
+                                {
+                                    "id": 7,
+                                    "area": "Ingeniería Industrial"
+                                },
+                                {
+                                    "id": 8,
+                                    "area": "Licenciatura en Estudios Mexicanos(modalidad virtual)"
+                                },
+                                {
+                                    "id": 9,
+                                    "area": "Ingeniería en Mecatrónica"
+                                },
+                                {
+                                    "id": 10,
+                                    "area": "Ingeniería en Física Aplicada"
+                                },
+                                {
+                                    "id": 11,
+                                    "area": "Ingeniería en Mecánica Automotriz"
+                                },
+                                {
+                                    "id": 12,
+                                    "area": "Ingeniería Civil"
+                                },
+                                {
+                                    "id": 14,
+                                    "area": "Idiomas"
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Carreras"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/estudiantes": {
+            "get": {
+                "tags": [
+                    "Estudiantes"
+                ],
+                "summary": "Listado de todos los estudiantes que existen en la Biblioteca.",
+                "description": "<p>Servicio que devuelve la información detallada de todos los estudiantes que existen en la Biblioteca.</p><p>&nbsp;</p><p><em><strong>¿Cuáles son las Estudiantes?</strong></em></p>",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "id": 2,
+                                    "nombre": "Manuel Eduardo Aguilar Roja",
+                                    "carrera": "Industrial",
+                                    "correo": "manuel13@gmail.com",
+                                    "telefono": "953 465 23 35",
+                                    "direccion": "Huajuapan, calle 15 de abril"
+                                },
+                                {
+                                    "id": 3,
+                                    "nombre": "Maria Eulalia Aguirre Mora",
+                                    "carrera": "Fisica",
+                                    "correo": "eulalia24@gmail.com",
+                                    "telefono": "953 672 32 89",
+                                    "direccion": "Acatlima, calle 23 de marzo"
+                                },
+                                {
+                                    "id": 4,
+                                    "nombre": "Jose Ovidio Aguirre Mosquera",
+                                    "carrera": "Matematicas",
+                                    "correo": "jose65@gmail.com",
+                                    "telefono": "951 345 23 87",
+                                    "direccion": "Oaxac de Juarez, calle 10 puerto angel"
+                                },
+                                {
+                                    "id": 7,
+                                    "nombre": "David Osvaldo Matias Ruiz",
+                                    "carrera": "Computacion",
+                                    "correo": "matias@gmail.com",
+                                    "telefono": "953 456 34 21",
+                                    "direccion": "6 de abril, Acatlima, Huajuapan de Leon"
+                                },
+                                {
+                                    "id": 8,
+                                    "nombre": "Emmanuel Martinez Alegria",
+                                    "carrera": "Electronica",
+                                    "correo": "emma@gmail.com",
+                                    "telefono": "951 345 78 65",
+                                    "direccion": "Calle 10 de abril, Oaxaca de Juarez"
+                                },
+                                {
+                                    "id": 16,
+                                    "nombre": "Marely Martínez Alegría",
+                                    "carrera": "Física",
+                                    "correo": "maly@gmail.com",
+                                    "telefono": "951 342 58 89",
+                                    "direccion": "Ciudad de Mexico"
+                                },
+                                {
+                                    "id": 19,
+                                    "nombre": "Dulce Mayreli Rodriguez Gómez",
+                                    "carrera": "Diseño Gráfico",
+                                    "correo": "dulce@gmail.com",
+                                    "telefono": "952 345 56 77",
+                                    "direccion": "San Pedro Totolapan"
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Estudiantes"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/libros": {
+            "get": {
+                "tags": [
+                    "Libros"
+                ],
+                "summary": "Listado de todos los libros que existen en la Biblioteca.",
+                "description": "<p>Servicio que devuelve la información detallada de todos los libros que existen en la Biblioteca.</p><p>&nbsp;</p><p><em><strong>¿Cuáles son los Libros?</strong></em></p>",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "id": 1,
+                                    "titulo": "Calculo de una variable",
+                                    "autor": "James Stewart",
+                                    "disponibles": 4,
+                                    "editorial": "Austrial",
+                                    "area": "Matematicas"
+                                },
+                                {
+                                    "id": 2,
+                                    "titulo": "Matematicas discretas con aplicaciones",
+                                    "autor": "Omar Ramirez Rosas",
+                                    "disponibles": 10,
+                                    "editorial": "Deusto",
+                                    "area": "Matematicas"
+                                },
+                                {
+                                    "id": 3,
+                                    "titulo": "PHP: programacion web avanzada para profesionales",
+                                    "autor": "Christian Gabriel Cibelli",
+                                    "disponibles": 15,
+                                    "editorial": "CrossBooks",
+                                    "area": "Computación"
+                                },
+                                {
+                                    "id": 4,
+                                    "titulo": "Fundamentos de bases de datos",
+                                    "autor": "Henry F.Korth",
+                                    "disponibles": 20,
+                                    "editorial": "Espasa",
+                                    "area": "Computación"
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Libros"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/prestamos": {
+            "get": {
+                "tags": [
+                    "Prestamos"
+                ],
+                "summary": "Listado de todos los prestamos que existen en la Biblioteca.",
+                "description": "<p>Servicio que devuelve la información detallada de todos los prestamos que existen en la Biblioteca.</p><p>&nbsp;</p><p><em><strong>¿Cuáles son los Prestamos?</strong></em></p>",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "id": 3,
+                                    "id_libro": 4,
+                                    "id_estudiante": 7,
+                                    "cantidadLibros": 1,
+                                    "fechaPrestamo": "2023-01-21",
+                                    "horaPrestamo": "06:04:00",
+                                    "observacion": "Buen estado.",
+                                    "horaDevolucion": "05:05:00",
+                                    "comentarios": "Buen estado"
+                                },
+                                {
+                                    "id": 4,
+                                    "id_libro": 3,
+                                    "id_estudiante": 8,
+                                    "cantidadLibros": 1,
+                                    "fechaPrestamo": "2023-01-22",
+                                    "horaPrestamo": "23:27:00",
+                                    "observacion": "Buen estado.",
+                                    "horaDevolucion": "02:03:00",
+                                    "comentarios": "Buen estado"
+                                },
+                                {
+                                    "id": 9,
+                                    "id_libro": 2,
+                                    "id_estudiante": 2,
+                                    "cantidadLibros": 1,
+                                    "fechaPrestamo": "2023-02-10",
+                                    "horaPrestamo": "00:18:00",
+                                    "observacion": "dsfvedgved",
+                                    "horaDevolucion": "15:03:00",
+                                    "comentarios": "buen estado"
+                                },
+                                {
+                                    "id": 10,
+                                    "id_libro": 1,
+                                    "id_estudiante": 16,
+                                    "cantidadLibros": 1,
+                                    "fechaPrestamo": "2023-02-18",
+                                    "horaPrestamo": "15:37:00",
+                                    "observacion": "fewfewfewf",
+                                    "horaDevolucion": "23:01:00",
+                                    "comentarios": "mal estado"
+                                },
+                                {
+                                    "id": 11,
+                                    "id_libro": 3,
+                                    "id_estudiante": 4,
+                                    "cantidadLibros": 1,
+                                    "fechaPrestamo": "2023-02-10",
+                                    "horaPrestamo": "18:09:00",
+                                    "observacion": "buen estqado",
+                                    "horaDevolucion": "02:02:00",
+                                    "comentarios": "dbsdbsd"
+                                },
+                                {
+                                    "id": 13,
+                                    "id_libro": 2,
+                                    "id_estudiante": 7,
+                                    "cantidadLibros": 1,
+                                    "fechaPrestamo": "2023-02-11",
+                                    "horaPrestamo": "12:23:00",
+                                    "observacion": "jblulbvh",
+                                    "horaDevolucion": "19:04:00",
+                                    "comentarios": "Buen Estado"
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Prestamos"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/usuarios/": {
+            "post": {
+                "summary": "Agregar un usuario a la Biblioteca.",
+                "description": "<p>Servicio que ingresa un usuario mas al  sistema de la Biblioteca </p><p>&nbsp;</p><p><em><strong>¿Cual usuario se agrega?</strong></em></p>",
+                "operationId": "create",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Usuario",
+                        "in": "body",
+                        "description": "Ingrese los datos del usuario",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/NuevoUsuario"
+                        }
+                    }
+                ],
+                "tags": [
+                    "Usuarios"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Usuario creado",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "fieldCount": 0,
+                                    "affectedRows": 1,
+                                    "insertId": 4,
+                                    "serverStatus": 2,
+                                    "warningCount": 0,
+                                    "message": "",
+                                    "protocol41": true,
+                                    "changedRows": 0
+                                }
+                            ]
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/carreras/": {
+            "post": {
+                "summary": "Agregar una carrera a la Biblioteca.",
+                "description": "<p>Servicio que ingresa una carrera mas al  sistema de la Biblioteca </p><p>&nbsp;</p><p><em><strong>¿Cual carrera se agrega?</strong></em></p>",
+                "operationId": "create",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "carrera",
+                        "in": "body",
+                        "description": "Ingrese los datos de la carrera",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/NuevaCarrera"
+                        }
+                    }
+                ],
+                "tags": [
+                    "Carreras"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Carrera creada",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "fieldCount": 0,
+                                    "affectedRows": 1,
+                                    "insertId": 4,
+                                    "serverStatus": 2,
+                                    "warningCount": 0,
+                                    "message": "",
+                                    "protocol41": true,
+                                    "changedRows": 0
+                                }
+                            ]
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/estudiantes/": {
+            "post": {
+                "summary": "Agregar un estudiante a la Biblioteca.",
+                "description": "<p>Servicio que ingresa un estudiante mas al  sistema de la Biblioteca </p><p>&nbsp;</p><p><em><strong>¿Cual estudiante se agrega?</strong></em></p>",
+                "operationId": "create",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "estudiante",
+                        "in": "body",
+                        "description": "Ingrese los datos del estudiante",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/NuevoEstudiante"
+                        }
+                    }
+                ],
+                "tags": [
+                    "Estudiantes"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Estudiante creado",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "fieldCount": 0,
+                                    "affectedRows": 1,
+                                    "insertId": 4,
+                                    "serverStatus": 2,
+                                    "warningCount": 0,
+                                    "message": "",
+                                    "protocol41": true,
+                                    "changedRows": 0
+                                }
+                            ]
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/libros/": {
+            "post": {
+                "summary": "Agregar un estudiante a la Biblioteca.",
+                "description": "<p>Servicio que ingresa un estudiante mas al  sistema de la Biblioteca </p><p>&nbsp;</p><p><em><strong>¿Cual materia se agrega?</strong></em></p>",
+                "operationId": "create",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "libro",
+                        "in": "body",
+                        "description": "Ingrese los datos del libro",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/NuevoLibro"
+                        }
+                    }
+                ],
+                "tags": [
+                    "Libros"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Libro creado",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "fieldCount": 0,
+                                    "affectedRows": 1,
+                                    "insertId": 4,
+                                    "serverStatus": 2,
+                                    "warningCount": 0,
+                                    "message": "",
+                                    "protocol41": true,
+                                    "changedRows": 0
+                                }
+                            ]
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/prestamos/": {
+            "post": {
+                "summary": "Agregar un prestamo a la Biblioteca.",
+                "description": "<p>Servicio que ingresa un prestamo mas al  sistema de la Biblioteca </p><p>&nbsp;</p><p><em><strong>¿Cual el prestamo que  se agrega?</strong></em></p>",
+                "operationId": "create",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "prestamo",
+                        "in": "body",
+                        "description": "Ingrese los datos de nuevo prestamo",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/NuevoPrestamo"
+                        }
+                    }
+                ],
+                "tags": [
+                    "Prestamos"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Prestamo creado",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "fieldCount": 0,
+                                    "affectedRows": 1,
+                                    "insertId": 4,
+                                    "serverStatus": 2,
+                                    "warningCount": 0,
+                                    "message": "",
+                                    "protocol41": true,
+                                    "changedRows": 0
+                                }
+                            ]
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/usuarios/update/{idUsuario}": {
+            "put": {
+                "summary": "Modificar los datos de un usuario",
+                "description": "<p>Servicio que modifica la información de un usuario que pertenece a la biblioteca </p><p>&nbsp;</p><p><em><strong>¿Cuál es ese usuario?</strong></em></p>",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "idUsuario",
+                        "in": "path",
+                        "description": "Ingrese el id del usuario",
+                        "required": true,
+                        "default": 1
+                    },
+                    {
+                        "name": "Usuario",
+                        "in": "body",
+                        "description": "Ingrese la info del usuario",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/viejoUsuario"
+                        }
+                    }
+                ],
+                "tags": [
+                    "Usuarios"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "servicio OK"
+                    }
+                }
+            }
+        },
+        "/api/carreras/update/{idCarrera}": {
+            "put": {
+                "summary": "Modificar los datos de una carrera",
+                "description": "<p>Servicio que modifica la información de una carrera  que pertenece a la biblioteca </p><p>&nbsp;</p><p><em><strong>¿Cuál es esa carrera?</strong></em></p>",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "idCarrera",
+                        "in": "path",
+                        "description": "Ingrese el id de la carrera",
+                        "required": true,
+                        "default": 1
+                    },
+                    {
+                        "name": "Carreras",
+                        "in": "body",
+                        "description": "Ingrese la info de la carrera",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/viejaCarrera"
+                        }
+                    }
+                ],
+                "tags": [
+                    "Carreras"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "servicio OK"
+                    }
+                }
+            }
+        },
+        "/api/estudiantes/update/{idEstudiante}": {
+            "put": {
+                "summary": "Modificar los datos de un estudiante",
+                "description": "<p>Servicio que modifica la información de un estudiante  que pertenece a la biblioteca </p><p>&nbsp;</p><p><em><strong>¿Cuál es ese estudiante?</strong></em></p>",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "idEstudiante",
+                        "in": "path",
+                        "description": "Ingrese el id del estudiante",
+                        "required": true,
+                        "default": 1
+                    },
+                    {
+                        "name": "Estudiantes",
+                        "in": "body",
+                        "description": "Ingrese la info del estudiante",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/viejoEstudiante"
+                        }
+                    }
+                ],
+                "tags": [
+                    "Estudiantes"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "servicio OK"
+                    }
+                }
+            }
+        },
+        "/api/libros/update/{idLibro}": {
+            "put": {
+                "summary": "Modificar los datos de un libro",
+                "description": "<p>Servicio que modifica la información de un libro  que pertenece a la biblioteca </p><p>&nbsp;</p><p><em><strong>¿Cuál es ese libro?</strong></em></p>",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "idLibro",
+                        "in": "path",
+                        "description": "Ingrese el id del libro",
+                        "required": true,
+                        "default": 1
+                    },
+                    {
+                        "name": "Libros",
+                        "in": "body",
+                        "description": "Ingrese la info del libro",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/viejoLibro"
+                        }
+                    }
+                ],
+                "tags": [
+                    "Libros"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "servicio OK"
+                    }
+                }
+            }
+        },
+        "/api/prestamos/update/{idPrestamo}": {
+            "put": {
+                "summary": "Modificar los datos de un prestamo",
+                "description": "<p>Servicio que modifica la información de un prestamo  que pertenece a la biblioteca </p><p>&nbsp;</p><p><em><strong>¿Cuál es ese prestamo?</strong></em></p>",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "idPrestamo",
+                        "in": "path",
+                        "description": "Ingrese el id del prestamo",
+                        "required": true,
+                        "default": 1
+                    },
+                    {
+                        "name": "Prestamos",
+                        "in": "body",
+                        "description": "Ingrese la info del prestamo",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/NuevoPrestamo"
+                        }
+                    }
+                ],
+                "tags": [
+                    "Prestamos"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "servicio OK"
+                    }
+                }
+            }
+        },
+        "/api/usuarios/delete/{idUsuario}": {
+            "delete": {
+                "summary": "ELimina los datos de un usuario",
+                "description": "<p>Servicio que elimina la información de un usuario que pertenece a la biblioteca </p><p>&nbsp;</p><p><em><strong>¿Cuál es ese usuario?</strong></em></p>",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "idUsuario",
+                        "in": "path",
+                        "description": "Ingrese el id del usuario",
+                        "required": true,
+                        "default": 1
+                    }
+                ],
+                "tags": [
+                    "Usuarios"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "servicio OK"
+                    }
+                }
+            }
+        },
+        "/api/carreras/delete/{idCarrera}": {
+            "delete": {
+                "summary": "ELimina los datos de una carrera",
+                "description": "<p>Servicio que elimina la información de una carrera que pertenece a la biblioteca </p><p>&nbsp;</p><p><em><strong>¿Cuál es esa carrera?</strong></em></p>",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "idCarrera",
+                        "in": "path",
+                        "description": "Ingrese el id de la carrera",
+                        "required": true,
+                        "default": 1
+                    }
+                ],
+                "tags": [
+                    "Carreras"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "servicio OK"
+                    }
+                }
+            }
+        },
+        "/api/estudiantes/delete/{idEstudiante}": {
+            "delete": {
+                "summary": "ELimina los datos de un estudiante",
+                "description": "<p>Servicio que elimina la información de un estudiante que pertenece a la biblioteca </p><p>&nbsp;</p><p><em><strong>¿Cuál es ese estudiante?</strong></em></p>",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "idEstudiante",
+                        "in": "path",
+                        "description": "Ingrese el id del estudiante",
+                        "required": true,
+                        "default": 1
+                    }
+                ],
+                "tags": [
+                    "Estudiantes"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "servicio OK"
+                    }
+                }
+            }
+        },
+        "/api/libros/delete/{idLibro}": {
+            "delete": {
+                "summary": "ELimina los datos de un libro",
+                "description": "<p>Servicio que elimina la información de un libro que pertenece a la biblioteca </p><p>&nbsp;</p><p><em><strong>¿Cuál es ese libro?</strong></em></p>",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "idLibro",
+                        "in": "path",
+                        "description": "Ingrese el id del libro",
+                        "required": true,
+                        "default": 1
+                    }
+                ],
+                "tags": [
+                    "Libros"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "servicio OK"
+                    }
+                }
+            }
+        },
+        "/api/prestamos/delete/{idPrestamos}": {
+            "delete": {
+                "summary": "ELimina los datos de un prestamo",
+                "description": "<p>Servicio que elimina la información de un prestamo que pertenece a la biblioteca </p><p>&nbsp;</p><p><em><strong>¿Cuál es ese prestamo?</strong></em></p>",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "idPrestamos",
+                        "in": "path",
+                        "description": "Ingrese el id del prestamo",
+                        "required": true,
+                        "default": 1
+                    }
+                ],
+                "tags": [
+                    "Prestamos"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "servicio OK"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Usuarios": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Usuario"
+            }
+        },
+        "Usuario": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "description": "Identificador único de un usuario"
+                },
+                "email": {
+                    "type": "string",
+                    "description":"Describe el correo de un usuario"
+                },
+                "nombre": {
+                    "type": "string",
+                    "description": "Describe el nombre de los usuarios"
+                },
+                "telefono": {
+                    "type": "number",
+                    "description": "Describe el telefono de un usuario"
+                },
+                "rol": {
+                    "type": "number",
+                    "description": "Describe el rol de cada usuario"
+                },
+                "password": {
+                    "type": "string",
+                    "description": "Describe la contraseña del usuario"
+                }
+            }
+        },
+        "NuevoUsuario": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type":"number",
+                    "description": "Identificador único de un usuario"
+                },
+                "email": {
+                    "type":"string",
+                    "description": "Describe el correo de un usuario"
+                },
+                "nombre": {
+                    "type":"string",
+                    "description": "Describe el nombre de los usuarios"
+                },
+                "telefono": {
+                    "type":"number",
+                    "description": "Describe el telefono de un usuario"
+                },
+                "rol": {
+                    "type":"number",
+                    "description": "Describe el rol de cada usuario"
+                },
+                "password": {
+                    "type":"string",
+                    "description": "Describe la contraseña del usuario"
+                }
+            }
+        },
+        "Carreras": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Carrera"
+            }
+        },
+        "Carrera": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type":"number",
+                    "description": "Identificador único de una carrera"
+                },
+                "area": {
+                    "type":"string",
+                    "description": "Describe el nombre de una carrera"
+                
+            }
+        }
+        },
+        "NuevaCarrera": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type":"number",
+                    "description": "Identificador único de una carrera"
+                },
+                "area": {
+                    "type":"string",
+                    "description": "Describe el nombre de una carrera"
+                
+            }
+            }
+        },
+
+
+
+
+
+
+        
+        "Estudiantes": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Estudiante"
+            }
+        },
+        "Estudiante": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type":"number",
+                    "description": "Identificador único de un estudiante"
+                },
+                "nombre": {
+                    "type":"string",
+                    "description": "Describe el nombre de un estudiante"
+                },
+                "carrera": {
+                    "type":"string",
+                    "description": "Describe la carrera de un estudiante"
+                },
+                "correo": {
+                    "type":"string",
+                    "description": "Describe el correo de un estudiante"
+                },
+                "telefono": {
+                    "type":"number",
+                    "description": "Describe el telefono de un estudiante"
+                },
+                "direccion": {
+                    "type":"string",
+                    "description": "Describe la direccion de un estudiante"
+                }
+            }
+        },
+        "NuevoEstudiante": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type":"number",
+                    "description": "Identificador único de un estudiante"
+                },
+                "nombre": {
+                    "type":"string",
+                    "description": "Describe el nombre de un estudiante"
+                },
+                "carrera": {
+                    "type":"string",
+                    "description": "Describe la carrera de un estudiante"
+                },
+                "correo": {
+                    "type":"string",
+                    "description": "Describe el correo de un estudiante"
+                },
+                "telefono": {
+                    "type":"number",
+                    "description": "Describe el telefono de un estudiante"
+                },
+                "direccion": {
+                    "type":"string",
+                    "description": "Describe la direccion de un estudiante"
+                }
+            }
+        },
+        "Libros": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Libro"
+            }
+        },
+        "Libro": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type":"number",
+                    "description": "Identificador único de un libro"
+                },
+                "titulo": {
+                    "type":"string",
+                    "description": "Describe el titulo de un libro"
+                },
+                "cantidad": {
+                    "type":"number",
+                    "description": "Describe la cantidad de libros"
+                },
+                "descripcion": {
+                    "type":"string",
+                    "description": "Describe la descripcion de un libro"
+                },
+                "autor": {
+                    "type":"string",
+                    "description": "Describe el autor  de un libro"
+                },
+                "editorial": {
+                    "type":"string",
+                    "description": "Describe la editorial de un estudiante"
+                }
+            }
+        },
+        "NuevoLibro": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type":"number",
+                    "description": "Identificador único de un libro"
+                },
+                "titulo": {
+                    "type":"string",
+                    "description": "Describe el titulo de un libro"
+                },
+                "cantidad": {
+                    "type":"number",
+                    "description": "Describe la cantidad de libros"
+                },
+                "edicion": {
+                    "type":"number",
+                    "description": "Describe el año de edicion de un libro"
+                },
+                "cantidadPaginas": {
+                    "type":"number",
+                    "description": "Describe la cantidad de paginas de un libro"
+                },
+                "descripcion": {
+                    "type":"string",
+                    "description": "Describe la descripcion de un libro"
+                },
+                "autor": {
+                    "type":"string",
+                    "description": "Describe el autor  de un libro"
+                },
+                "editorial": {
+                    "type":"string",
+                    "description": "Describe la editorial de un estudiante"
+                }
+            }
+        },
+        "Prestamos": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Prestamo"
+            }
+        },
+        "Prestamo": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type":"number",
+                    "description": "Identificador único de una materia"
+                },
+                "nombre": {
+                    "type":"string",
+                    "description": "Describe el nombre de una materia"
+                }
+            }
+        },
+        "NuevoPrestamo": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "description": "Identificador único de un prestamo"
+                },
+                "id_libro": {
+                    "type": "number",
+                    "description": "Describe el identificador único  de un libro a rentar"
+                },
+                "cantidadLibros": {
+                    "type": "number",
+                    "description": "Describe la cantidad de libros a prestar"
+                },
+                "fechaPrestamo": {
+                    "type": "string",
+                    "description": "Describe la fecha del prestamo de un libro"
+                },
+                "horaPrestamo": {
+                    "type": "string",
+                    "description": "Describe la hora del ptrestamo de un lubro"
+                },
+                "observacion": {
+                    "type": "string",
+                    "description": "Describe las observaciones  del libro prestado"
+                }
+            }
+        },
+        "viejoUsuario": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "description": "Identificador único de un usuario"
+                },
+                "email": {
+                    "type": "string",
+                    "description":"Describe el correo de un usuario"
+                },
+                "nombre": {
+                    "type": "string",
+                    "description": "Describe el nombre de los usuarios"
+                },
+                "telefono": {
+                    "type": "number",
+                    "description": "Describe el telefono de un usuario"
+                },
+                "rol": {
+                    "type": "number",
+                    "description": "Describe el rol de cada usuario"
+                },
+                "password": {
+                    "type": "string",
+                    "description": "DEscribe la contraseña del usuario"
+                }
+            }
+        },
+        "viejaCarrera": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "description": "Identificador único de una carrera"
+                },
+                "area": {
+                    "type": "string",
+                    "description": "Describe el nombre del area de una carrera"
+                }
+            }
+        },
+        "viejoEstudiante": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "description": "Identificador único de un estudiante"
+                },
+                "codigo": {
+                    "type": "number",
+                    "description": "Describe el codigo de un estudiante"
+                },
+                "nombre": {
+                    "type": "string",
+                    "description": "Describe el nombre de un estudiante"
+                },
+                "carrera": {
+                    "type": "string",
+                    "description": "Describe la carrera de un estudiante"
+                },
+                "correo": {
+                    "type": "st",
+                    "description": "Describe el correo de un estudiante"
+                },
+                "telefono": {
+                    "type": "number",
+                    "description": "Describe el telefono de un estudiante"
+                },
+                "direccion": {
+                    "type": "string",
+                    "description": "Describe la direccion de un estudiante"
+                }
+            }
+        },
+        "viejoLibro": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "description": "Identificador único de un libro"
+                },
+                "titulo": {
+                    "type": "string",
+                    "description": "Describe el titulo de un libro"
+                },
+                "cantidad": {
+                    "type": "number",
+                    "description": "Describe la cantidad de libros"
+                },
+                "edicion": {
+                    "type": "number",
+                    "description": "Describe el año de edicion de un libro"
+                },
+                "cantidadPaginas": {
+                    "type": "number",
+                    "description": "Describe la cantidad de paginas de un libro"
+                },
+                "descripcion": {
+                    "type": "string",
+                    "description": "Describe la descripcion de un libro"
+                },
+                "autor": {
+                    "type": "string",
+                    "description": "Describe el autor  de un libro"
+                },
+                "editorial": {
+                    "type": "string",
+                    "description": "Describe la editorial de un estudiante"
+                }
+            }
+        },
+        "viejoPrestamos": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "description": "Identificador único de un prestamo"
+                },
+                "id_libro": {
+                    "type": "number",
+                    "description": "Describe el identificador único  de un libro a rentar"
+                },
+                "id_estudiante": {
+                    "type": "number",
+                    "description": "Describe el nombre de un estudiante"
+                },
+                "cantidadLibros": {
+                    "type": "number",
+                    "description": "Describe la cantidad de libros a prestar"
+                },
+                "fechaPrestamo": {
+                    "type": "string",
+                    "description": "Describe la fecha del prestamo de un libro"
+                },
+                "horaPrestamo": {
+                    "type": "string",
+                    "description": "Describe la hora del ptrestamo de un lubro"
+                },
+                "observacion": {
+                    "type": "string",
+                    "description": "Describe las observaciones  del libro prestado"
+                }
+            }
+        }
+    }
+}

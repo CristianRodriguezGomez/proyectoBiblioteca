@@ -1,0 +1,315 @@
+<div class="bodyLoginadmin">
+    <!DOCTYPE html>
+    <html>
+
+
+    <head>
+        <meta charset="utf-8" />
+        <link href="estudiantes.component.css" rel="stylesheet" type="text/css" />
+    </head>
+
+    </html>
+
+    <div *ngIf="this.rol==1" id="datosEstudiantes">
+        <nav>
+            <div class="nav-wrapperadmin">
+                <a class="brand-logo" class="material-icons prefix">ESTUDIANTES person</a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+
+                
+                <li><input (change)="cargarExcelEstudiantes($event)" type="file"></li>
+                    
+                    <li> <a (click)="regresar()"
+                            class="btn-large waves-effect waves-heavy orange lighten-2 modal-trigger"
+                            class="material-icons prefix">home</a></li>
+
+                           <li> <div *ngIf="estudiantes!=undefined" class="center ">
+                                <button (click)="exportAsXLSX()"><img src="{{liga}}/excel.png"
+                                style="width:25px;height:25px;" ></button>
+                                </div>
+                            </li>
+                    <li><a data-target="modal1" class="btn-large waves-effect waves-heavy  green darken-2 modal-trigger"
+                            (click)="agregarNuevo(estudiante.id)">AGREGAR ESTUDIANTE</a></li>
+                </ul>
+            </div>
+        </nav>
+
+
+        <table class="centered" id="datosEstudiantes">
+
+           
+            <tr>
+                <th>ID</th>
+                <th>NOMBRE</th>
+                <th>CARRERA</th>
+                <th>CORREO</th>
+                <th>TELEFONO</th>
+                <th>DIRECCION</th>
+                <th>ACCIONES</th>
+            </tr>
+
+            <tr *ngFor="let estudiante of estudiantes |paginate: {itemsPerPage: pageSize,currentPage: p};let i=index">
+                <td> {{estudiante.id}}</td>
+                <td>{{estudiante.nombre}}</td>
+
+                <div *ngFor="let carrera of carreras">
+                    <td *ngIf="estudiante.idCarrera == carrera.id">{{carrera.area}}</td>
+                </div>
+                <td>{{estudiante.correo}}</td>
+                <td>{{estudiante.telefono}}</td>
+                <td>{{estudiante.direccion}}</td>
+
+                <td><a class="btn modal-trigger" (click)="eliminarEstudiante(estudiante.id)"><i
+                            class="material-icons prefix">delete</i></a>
+                    <a data-target="modal2" class="btn modal-trigger" (click)="editarEstudiante(estudiante.id)"><i
+                            class="material-icons prefix">edit</i></a>
+                </td>
+            </tr>
+
+           
+        </table>
+
+
+       
+        <style>
+            .my-pagination ::ng-deep .ngx-pagination  {
+              background: linear-gradient(rgb(108, 163, 195),rgb(108, 163, 195));
+            }
+            .my-pagination ::ng-deep .ngx-pagination .current{
+                background-color: rgb(108, 163, 195);
+              color: black;
+            }
+            </style>
+    <div class="center-align" id="paginacion">
+        <pagination-controls class="my-pagination" (pageChange)="p = ($event)" previousLabel="Anterior"
+            nextLabel="Siguiente" >
+        </pagination-controls>
+    </div>
+
+
+
+        <!--DATOS DE ESTUDIANTES PARA INGRESAR-->
+        <div id="modal1" class="modal">
+            <div class="modal-content">
+                <h4>DATOS DEL ESTUDANTE A INGRESAR</h4>
+
+                <div class="input-field">
+                    NOMBRE:
+                    <input [(ngModel)]="estudiante.nombre" type="text"><label for=""></label>
+                </div>
+
+                <div class="input-field">
+                    CARRERA:
+                    <select [(ngModel)]="estudiante.idCarrera" class="browser-default">
+
+                        <option *ngFor="let carrera of carreras" [value]="carrera.id" for="">
+                            {{carrera.id}}-{{carrera.area}}</option>
+
+                    </select>
+                </div>
+                <div class="input-field">
+                    CORREO:
+                    <input [(ngModel)]="estudiante.correo" type="text"><label for=""></label>
+                </div>
+                <div class="input-field">
+                    TELEFONO:
+                    <input [(ngModel)]="estudiante.telefono" type="text"><label for=""></label>
+                </div>
+                <div class="input-field">
+                    DIRECCION:
+                    <input [(ngModel)]="estudiante.direccion" type="text"><label for=""></label>
+                </div>
+
+                <div class="modal-footer">
+                    <a class="btn col l12 s12 m12 btnLogin modal-close " (click)="agregarEstudiante()"> INSERTAR </a>
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+        <div id="modal2" class="modal">
+            <div class="modal-content">
+                <h4>DATOS DEL ESTUDANTE A EDITAR</h4>
+
+                <div class="input-field">
+                    NOMBRE:
+                    <input [(ngModel)]="estudiante.nombre" type="text"><label for=""></label>
+                </div>
+
+                <div class="input-field">
+                    CARRERA:
+                    <select [(ngModel)]="estudiante.idCarrera" class="browser-default">
+
+                        <option *ngFor="let carrera of carreras" [value]="carrera.id" for="">
+                            {{carrera.id}}-{{carrera.area}}</option>
+
+                    </select>
+                </div>
+                <div class="input-field">
+                    CORREO:
+                    <input [(ngModel)]="estudiante.correo" type="text"><label for=""></label>
+                </div>
+                <div class="input-field">
+                    TELEFONO:
+                    <input [(ngModel)]="estudiante.telefono" type="text"><label for=""></label>
+                </div>
+                <div class="input-field">
+                    DIRECCION:
+                    <input [(ngModel)]="estudiante.direccion" type="text"><label for=""></label>
+                </div>
+
+                <div class="modal-footer">
+                    <a (click)="actualizarEstudiante()" class="btn col l12 s12 m12 btnLogin modal-close">ACTUALIZAR</a>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+<!------------------------------------------------------------------------------------------>
+<div class="bodyLoginencargado">
+    <!DOCTYPE html>
+    <html>
+
+
+    <head>
+        <meta charset="utf-8" />
+        <link href="estudiantes.component.css" rel="stylesheet" type="text/css" />
+    </head>
+
+    </html>
+
+    <div *ngIf="this.rol==2" max-width=auto>
+        <nav>
+            <div class="nav-wrapperencargado">
+                <a class="brand-logo" class="material-icons prefix">ESTUDIANTES person</a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li> <a (click)="regresar()"
+                            class="btn-large waves-effect waves-heavy orange lighten-2 modal-trigger"
+                            class="material-icons prefix">home</a></li>
+                    <li><a data-target="modal3" class="btn-large waves-effect waves-heavy green darken-2 modal-trigger"
+                            (click)="agregarNuevo(estudiante.id)">AGREGAR ESTUDIANTE</a></li>
+                </ul>
+            </div>
+        </nav>
+
+
+        <table class="centered" max-width=auto>
+
+            <tr>
+                <th>ID</th>
+                <th>NOMBRE</th>
+                <th>CARRERA</th>
+                <th>CORREO</th>
+                <th>TELEFONO</th>
+                <th>DIRECCION</th>
+                <th>ACCIONES</th>
+            </tr>
+
+            <tr *ngFor="let estudiante of estudiantes">
+                <td> {{estudiante.id}}</td>
+                <td>{{estudiante.nombre}}</td>
+
+                <div *ngFor="let carrera of carreras">
+                    <td *ngIf="estudiante.idCarrera == carrera.id">{{carrera.area}}</td>
+                </div>
+                <td>{{estudiante.correo}}</td>
+                <td>{{estudiante.telefono}}</td>
+                <td>{{estudiante.direccion}}</td>
+
+                <td><!--<a class="btn modal-trigger"  (click)="eliminarEstudiante(estudiante.id)"><i class="material-icons prefix">delete</i></a>-->
+                    <a data-target="modal4" class="btn modal-trigger" (click)="editarEstudiante(estudiante.id)"><i
+                            class="material-icons prefix">edit</i></a>
+                </td>
+            </tr>
+        </table>
+
+
+
+        <!--DATOS DE ESTUDIANTES PARA INGRESAR-->
+        <div id="modal3" class="modal">
+            <div class="modal-content">
+                <h4>DATOS DEL ESTUDIANTE A INGRESAR</h4>
+                <div class="input-field">
+                    NOMBRE:
+                    <input [(ngModel)]="estudiante.nombre" type="text"><label for=""></label>
+                </div>
+
+                <div class="input-field">
+                    CARRERA:
+                    <select [(ngModel)]="estudiante.idCarrera" class="browser-default">
+
+                        <option *ngFor="let carrera of carreras" [value]="carrera.id" for="">
+                            {{carrera.id}}-{{carrera.area}}</option>
+
+                    </select>
+                </div>
+                <div class="input-field">
+                    CORREO:
+                    <input [(ngModel)]="estudiante.correo" type="text"><label for=""></label>
+                </div>
+                <div class="input-field">
+                    TELEFONO:
+                    <input [(ngModel)]="estudiante.telefono" type="text"><label for=""></label>
+                </div>
+                <div class="input-field">
+                    DIRECCION:
+                    <input [(ngModel)]="estudiante.direccion" type="text"><label for=""></label>
+                </div>
+
+                <div class="modal-footer">
+                    <a class="btn col l12 s12 m12 btnLogin modal-close" (click)="agregarEstudiante()"> INSERTAR </a>
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+        <div id="modal4" class="modal">
+            <div class="modal-content">
+                <h4>DATOS DEL ESTUDANTE A EDITAR</h4>
+
+                <div class="input-field">
+                    NOMBRE:
+                    <input [(ngModel)]="estudiante.nombre" type="text"><label for=""></label>
+                </div>
+
+                <div class="input-field">
+                    CARRERA:
+                    <select [(ngModel)]="estudiante.idCarrera" class="browser-default">
+
+                        <option *ngFor="let carrera of carreras" [value]="carrera.id" for="">
+                            {{carrera.id}}-{{carrera.area}}</option>
+
+                    </select>
+                </div>
+                <div class="input-field">
+                    CORREO:
+                    <input [(ngModel)]="estudiante.correo" type="text"><label for=""></label>
+                </div>
+                <div class="input-field">
+                    TELEFONO:
+                    <input [(ngModel)]="estudiante.telefono" type="text"><label for=""></label>
+                </div>
+                <div class="input-field">
+                    DIRECCION:
+                    <input [(ngModel)]="estudiante.direccion" type="text"><label for=""></label>
+                </div>
+
+                <div class="modal-footer">
+                    <a (click)="actualizarEstudiante()" class="btn col l12 s12 m12 btnLogin modal-close">ACTUALIZAR</a>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>

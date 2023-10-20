@@ -1,0 +1,97 @@
+@import '~material-design-icons/iconfont/material-icons.css';
+
+
+.bodyLogin {
+   /* background: rgba(202, 123, 171, 0.518);*/
+   background-color: #e1bee7 ;
+    opacity: 0.9;
+    
+    height: auto;
+    /* 100 por ciento del alto del dispositivo*/
+    width: auto;
+    /* 100 por ciento del alto del dispositivo*/
+    
+  }
+
+
+.loginContainer {
+    padding: 100px;
+}
+
+.loginTitulo {
+    width: 100%;
+    text-align: center;
+}
+.loginBiblio{
+    width: 100%;
+    text-align: center;
+}
+.loginFrase{
+    width: 100%;
+    text-align: center;
+}
+
+.loginTitulo h4 {
+    font-style: italic;
+}
+.loginFrase{
+    font-style: italic;
+}
+
+.customInput {
+    height: 10vh;
+    width: 10vw;
+    margin-top: 30px;
+    background-color: #7e5858;
+    border-radius: 50px;
+    padding: 14px !important;
+}
+
+.customInput input {
+    position: relative;
+    padding-left: 30px;
+    border-style: none;
+    background-color: transparent;
+    outline: none;
+}
+
+.customInput i {
+    position: absolute;
+    color: rgb(173, 186, 191);
+    z-index: 999;
+    transition: all 2s ease 0s;
+}
+
+
+.btnLogin {
+    border-radius: 50px;
+    
+    background-color: rgb(141, 128, 128);
+}
+
+.divOlvide {
+    text-align: center;
+}
+.icons prefix{
+    width: auto;
+    height:auto;
+}
+.responsive-img{
+    max-width: auto;
+    height:auto;
+    -ms-flex-item-align: center;
+
+  }
+  .OlvidarContra{
+    border-top-color: rgb(141, 128, 128);
+}
+.modal{
+    color: rgb(144, 100, 35);
+}
+.row{
+    color: rgb(17, 18, 18);
+}
+
+.modal-content{
+    background-color: #65ba9092;
+}

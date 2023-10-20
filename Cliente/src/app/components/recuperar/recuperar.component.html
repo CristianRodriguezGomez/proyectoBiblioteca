@@ -1,0 +1,24 @@
+
+<div class="modal-content">
+    <div class="row" style="margin-bottom: 0px !important;">
+        <div class="center">
+            <h1 >Cambio de  Contraseña</h1>
+         <h6>   Mínimo 8 caracteres, 1 letra mayuscula y 1 caracter especial: $,#,&</h6>
+</div>
+<div class="container">
+    <div class="input-field">
+        <label 
+        
+        for="">Contraseña nueva</label>
+     
+
+        <input type="password" [(ngModel)]="usuario1.password">
+        
+    <div class="input-field">
+        <label for="">Repetir Contraseña</label>
+        <input type="password" [(ngModel)]="usuario2.password">
+    </div>
+    <button   (click)="enviarContrasenia()">Actualizar</button>
+</div>
+</div>
+

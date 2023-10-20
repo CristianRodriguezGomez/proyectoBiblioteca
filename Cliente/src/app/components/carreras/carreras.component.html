@@ -1,0 +1,218 @@
+<div class="bodyLoginadmin">
+    <!DOCTYPE html>
+    <html>
+
+
+    <head>
+        <meta charset="utf-8" />
+        <link href="carreras.component.css" rel="stylesheet" type="text/css" />
+    </head>
+
+    </html>
+    <div *ngIf="this.rol==1" id="datosLicenciaturas">
+
+        <nav>
+            <div class="nav-wrapperadmin" id="datosLicenciaturas">
+                <a class="brand-logo " class="material-icons prefix">LICENCIATURAS assignment</a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+
+                    <li><input (change)="cargarExcelCarreras($event)" type="file"></li>
+
+                    <li> <a (click)="regresar()"
+                            class="btn-large waves-effect waves-heavy orange lighten-2 modal-trigger"
+                            class="material-icons prefix">home</a>
+                    </li>
+                    <li>
+                        <div *ngIf="carreras!=undefined" class="center ">
+                            <button (click)="exportAsXLSX()"><img alt="EXCEL" src="{{liga}}/excel.png"
+                                    style="width:25px;height:25px;"></button>
+                        </div>
+
+                    </li>
+                    <li><a data-target="modalCarreras2"
+                            class="btn-large waves-effect waves-heavy  green darken-2 modal-trigger"
+                            (click)="agregarNueva(carrera.id)">AGREGAR CARRERA</a></li>
+
+                </ul>
+
+            </div>
+        </nav>
+
+
+        <i class="material-icons prefix">assignment</i>
+
+
+        <table class="centered" id="datosLicenciaturas">
+
+            <tr>
+
+                <th>ID</th>
+                <th>ÁREA</th>
+                <th>ACCIONES</th>
+
+            </tr>
+            <tr *ngFor="let carrera of carreras |paginate: {itemsPerPage: pageSize,currentPage: p};let i=index">
+                <td>{{carrera.id}}</td>
+                <td>{{carrera.area}}</td>
+
+                <td><a class="btn modal-trigger" (click)="eliminarCarrera(carrera.id)"><i
+                            class="material-icons prefix">delete</i></a>
+                    <a data-target="modalCarreras1" class="btn modal-trigger" (click)="editarCarrera(carrera.id)"><i
+                            class="material-icons prefix">edit</i></a>
+                </td>
+
+
+            </tr>
+
+
+        </table>
+
+
+        <style>
+            .my-pagination ::ng-deep .ngx-pagination  {
+              background: linear-gradient(rgb(108, 163, 195),rgb(108, 163, 195));
+            }
+            .my-pagination ::ng-deep .ngx-pagination .current{
+                background-color: rgb(108, 163, 195);
+              color: black;
+            }
+            </style>
+    <div class="center-align" id="paginacion">
+        <pagination-controls class="my-pagination" (pageChange)="p = ($event)" previousLabel="Anterior"
+            nextLabel="Siguiente" >
+        </pagination-controls>
+    </div>
+
+
+
+
+
+
+
+
+        <div id="modalCarreras2" class="modal">
+            <div class="modal-content">
+
+                <h4>DATOS DE LA CARRERA A INGRESAR</h4>
+                <div class="input-field">
+                    ÁREA:
+                    <input [(ngModel)]="carrera.area" type="text"><label for=""></label>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn col l12 s12 m12 btnLogin modal-close" (click)="agregarCarrera()">INSERTAR </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="modalCarreras1" class="modal">
+            <div class="modal-content">
+
+                <h4>DATOS DE LA CARRERA A EDITAR</h4>
+                <div class="input-field">
+                    ÁREA:
+                    <input [(ngModel)]="carrera.area" type="text"><label for=""></label>
+                </div>
+
+
+                <div class="modal-footer">
+                    <a (click)="actualizarCarrera()" class="btn col l12 s12 m12 btnLogin modal-close">ACTUALIZAR</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!------------------------------------------------------------------------------------------>
+    <div *ngIf="this.rol==2">
+
+        <nav>
+            <div class="nav-wrapper">
+                <a class="brand-logo ">LICENCIATURAS</a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li> <a (click)="regresar()"
+                            class="btn-large waves-effect waves-heavy orange lighten-2 modal-trigger"
+                            class="material-icons prefix">home</a></li>
+                    <li><a data-target="modalLibros4"
+                            class="btn-large waves-effect waves-heavy green darken-2 modal-trigger"
+                            (click)="agregarNueva(carrera.id)">AGREGAR CARRERA</a></li>
+
+                </ul>
+
+            </div>
+        </nav>
+
+
+        <i class="material-icons prefix">collections_bookmark</i>
+
+
+        <table class="centered">
+
+            <tr>
+
+                <th>ID</th>
+                <th>ÁREA</th>
+
+
+            </tr>
+            <tr *ngFor="let carrera of carreras">
+                <td>{{carrera.id}}</td>
+                <td>{{carrera.area}}</td>
+
+                <td><a data-target="modalLibros3" class="btn modal-trigger" (click)="editarCarrera(carrera.id)"><i
+                            class="material-icons prefix">edit</i></a></td>
+
+
+            </tr>
+        </table>
+        <div id="modalCarreras3" class="modal">
+            <div class="modal-content">
+
+                <h4>DATOS DE LA CARRERA A EDITAR</h4>
+                <div class="input-field">
+                    TITULO:
+                    <input [(ngModel)]="carrera.area" type="text"><label for=""></label>
+                </div>
+
+
+                <div class="modal-footer">
+                    <a (click)="actualizarCarrera()" class="btn col l12 s12 m12 btnLogin modal-close">ACTUALIZAR</a>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        <div id="modalCarreras4" class="modal">
+            <div class="modal-content">
+
+                <h4>DATOS DE LA CARRERA A INGRESAR</h4>
+                <div class="input-field">
+                    ÁREA:
+                    <input [(ngModel)]="Nuevacarrera.area" type="text"><label for=""></label>
+                </div>
+
+
+
+                <div class="modal-footer">
+                    <a class="btn col l12 s12 m12 btnLogin modal-close" (click)="agregarCarrera()">INSERTAR </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

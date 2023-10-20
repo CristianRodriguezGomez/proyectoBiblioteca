@@ -1,0 +1,30 @@
+@import '~material-design-icons/iconfont/material-icons.css';
+
+
+.bodyLoginadmin {
+  background: rgb(136, 213, 154);
+  
+  height: auto;
+  /* 100 por ciento del alto del dispositivo*/
+  width: auto;
+  /* 100 por ciento del alto del dispositivo*/
+}
+.material-icons{
+  font-size: 30px;
+}
+
+.nav-wrapperadmin{
+  background-color: rgba(85, 230, 49, 0.716);
+}
+.modal{
+  background-color: rgba(118, 191, 225, 0.476);
+  color-scheme: green;
+}
+.input-field{
+  background-color: bisque;
+}
+
+
+
+
+

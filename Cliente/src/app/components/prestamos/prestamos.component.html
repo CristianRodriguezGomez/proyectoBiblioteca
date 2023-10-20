@@ -1,0 +1,477 @@
+<div class="bodyLoginadmin">
+    <!DOCTYPE html>
+    <html>
+
+
+    <head>
+        <meta charset="utf-8" />
+        <link href="prestamos.component.css" rel="stylesheet" type="text/css" />
+    </head>
+
+    </html>
+
+    <div *ngIf="this.rol==1" id="datosPrestamos">
+        <nav>
+            <div class="nav-wrapperadmin">
+                <a class="brand-logo" class="material-icons prefix">PRESTAMOS attach_file </a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li> <a href="home" (click)="regresar()"
+                            class="btn-large waves-effect waves-heavy orange lighten-2 modal-trigger"
+                            class="material-icons prefix">home</a></li>
+                    <li>
+                        <div *ngIf="prestamos!=undefined" class="center ">
+                            <button (click)="exportAsXLSX()"><img alt="EXCEL" src="{{liga}}/excel.png"
+                                    style="width:25px;height:25px;"></button>
+                        </div>
+
+                    </li>
+                    <li><a data-target="modalPrestamosAgregar"
+                            class="btn-large waves-effect waves-heavy  green darken-2 modal-trigger"
+                            (click)="agregarNuevo(prestamo.id)">AGREGAR PRESTAMO</a></li>
+
+                </ul>
+            </div>
+        </nav>
+
+
+
+        <table class="centered">
+
+
+            <tr>
+                <th>ID</th>
+                <th>LIBRO</th>
+                <th>ESTUDIANTE</th>
+                <th>CANTIDAD DE LIBROS</th>
+                <th>FECHA DE PRESTAMO</th>
+                <th>HORA DEL PRESTAMO</th>
+                <th>OBSERVACIONES</th>
+                <th>HORA DE DEVOLUCIÓN</th>
+                <th>COMENTARIOS</th>
+                <th>ACCIONES</th>
+
+            </tr>
+
+            <tr *ngFor="let prestamo of prestamos |paginate: {itemsPerPage: pageSize,currentPage: p};let i=index">
+                <td> {{prestamo.id}}</td>
+                <td>
+                    <div *ngFor="let libro of libros">
+                <td *ngIf="prestamo.id_libro == libro.id">{{libro.titulo}}</td>
+    </div>
+    </td>
+    <td>
+        <div *ngFor="let estudiante of estudiantes ">
+    <td *ngIf="prestamo.id_estudiante == estudiante.id">{{estudiante.nombre}}</td>
+</div>
+</td>
+<td>{{prestamo.cantidadLibros}}</td>
+<td>{{prestamo.fechaPrestamo}}</td>
+<td>{{prestamo.horaPrestamo}}</td>
+<td>{{prestamo.observacion}}</td>
+<td>{{prestamo.horaDevolucion}}</td>
+<td>{{prestamo.comentarios}}</td>
+
+<td><a class="btn modal-trigger" (click)="eliminarPrestamo(prestamo.id)"><i class="material-icons prefix">delete</i></a>
+    <a href="home/prestamos" data-target="modalPrestamosEdit" class="btn modal-trigger"
+        (click)="editarPrestamo(prestamo.id)"><i class="material-icons prefix">edit</i></a>
+    <a data-target="modalPrestamosVisualizar" class="btn modal-trigger" (click)="visualizarPrestamo(prestamo.id)"><i
+            class="material-icons prefix">remove_red_eye</i></a>
+    <a data-target="modalPrestamosRegresar" class="btn modal-trigger" (click)="regresarLibro(prestamo.id)">DEVOLVER
+        LIBRO</a>
+
+</td>
+</tr>
+</table>
+
+<style>
+    .my-pagination ::ng-deep .ngx-pagination  {
+      background: linear-gradient(rgb(108, 163, 195),rgb(108, 163, 195));
+    }
+    .my-pagination ::ng-deep .ngx-pagination .current{
+        background-color: rgb(108, 163, 195);
+      color: black;
+    }
+    </style>
+<div class="center-align" id="paginacion">
+<pagination-controls class="my-pagination" (pageChange)="p = ($event)" previousLabel="Anterior"
+    nextLabel="Siguiente" >
+</pagination-controls>
+</div>
+
+<!--LISTA PARA AGREGAR PRESTAMO-->
+<div id="modalPrestamosAgregar" class="modal">
+    <div class="modal-content">
+
+        <h4>DATOS DE PRESTAMO A INGRESAR</h4>
+        <div class="input-field">
+            LISTA DE LIBROS:
+            <select [(ngModel)]="prestamo.id_libro" class="browser-default">
+
+                <option *ngFor="let libro of libros" [value]="libro.id" for="">{{libro.id}}-{{libro.titulo}}</option>
+
+            </select>
+
+            <!--<input [(ngModel)]="prestamo.id_libro" type="number"><label for="">ID_LIBRO</label>-->
+        </div>
+
+        <div class="input-field">
+            LISTA DE ESTUDIANTES:
+            <select [(ngModel)]="prestamo.id_estudiante" class="browser-default">
+
+                <option *ngFor="let estudiante of estudiantes" [value]="estudiante.id" for=" ">
+                    {{estudiante.id}}-{{estudiante.nombre}}</option>
+
+            </select>
+            <!--<input [(ngModel)]="prestamo.id_estudiante" type="number"><label for="">ID_ESTUDIANTE</label>-->
+
+        </div>
+
+        <div class="input-field">
+            CANTIDAD DE LIBROS:
+            <input [(ngModel)]="prestamo.cantidadLibros" type="number"><label for=""></label>
+        </div>
+
+        <div class="input-field">
+            FECHA DE PRESTAMO:
+            <input [(ngModel)]="prestamo.fechaPrestamo" type="date"><label for=""></label>
+        </div>
+
+        <div class="input-field">
+            HORA DE PRESTAMO:
+            <input [(ngModel)]="prestamo.horaPrestamo" type="time"><label for=""></label>
+        </div>
+
+        <div class="input-field">
+            OBSERVACIONES:
+            <input [(ngModel)]="prestamo.observacion" type="text"><label for=""></label>
+        </div>
+        <div class="modal-footer">
+            <a class="btn col l12 s12 m12 btnLogin modal-close" (click)="agregarPrestamo()"> INSERTAR </a>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<!--LISTA PARA EDITAR PRESTAMO-->
+<div id="modalPrestamosEdit" class="modal">
+    <div class="modal-content">
+
+        <h4>DATOS DEL PRESTAMO A EDITAR</h4>
+        <div class="input-field">
+            LISTA DE LIBROS:
+            <select [(ngModel)]="prestamo.id_libro" class="browser-default">
+
+                <option *ngFor="let libro of libros" [value]="libro.id" for="">{{libro.id}}-{{libro.titulo}}</option>
+
+            </select>
+
+            <!--<input [(ngModel)]="prestamo.id_libro" type="number"><label for="">ID_LIBRO</label>-->
+        </div>
+
+        <div class="input-field">
+            LISTA DE ESTUDIANTES:
+            <select [(ngModel)]="prestamo.id_estudiante" class="browser-default">
+
+                <option *ngFor="let estudiante of estudiantes" [value]="estudiante.id" for=" ">
+                    {{estudiante.id}}-{{estudiante.nombre}}</option>
+
+            </select>
+            <!--<input [(ngModel)]="prestamo.id_estudiante" type="number"><label for="">ID_ESTUDIANTE</label>-->
+
+        </div>
+
+        <div class="input-field">
+            CANTIDAD DE LIBROS:
+            <input [(ngModel)]="prestamo.cantidadLibros" type="number"><label for=""></label>
+        </div>
+
+        <div class="input-field">
+            FECHA DE PRESTAMO:
+            <input [(ngModel)]="prestamo.fechaPrestamo" type="date"><label for=""></label>
+        </div>
+
+        <div class="input-field">
+            HORA DE PRESTAMO:
+            <input [(ngModel)]="prestamo.horaPrestamo" type="time"><label for=""></label>
+        </div>
+
+        <div class="input-field">
+            OBSERVACIONES:
+            <input [(ngModel)]="prestamo.observacion" type="text"><label for=""></label>
+        </div>
+
+
+        <div class="modal-footer">
+            <a (click)="actualizarPrestamo()" class="btn col l12 s12 m12 btnLogin modal-close">ACTUALIZAR</a>
+        </div>
+    </div>
+</div>
+
+
+
+<!--LISTA PARA VISUALIZAR PRESTAMO-->
+<div id="modalPrestamosVisualizar" class="modal">
+    <div class="modal-content">
+
+        <h4>DATOS A VISUALIZAR</h4>
+        <div class="input-field">
+            ID_LIBRO:
+            <input [(ngModel)]="prestamo.id_libro" type="number"><label for=""></label>
+        </div>
+
+        <div class="input-field">
+            ID_ESTUDIANTE:
+            <input [(ngModel)]="prestamo.id_estudiante" type="number"><label for=""></label>
+        </div>
+
+        <div class="input-field">
+            CANTIDAD DE LIBROS:
+            <input [(ngModel)]="prestamo.cantidadLibros" type="number"><label for=""></label>
+        </div>
+
+        <div class="input-field">
+            FECHA DE PRESTAMO:
+            <input [(ngModel)]="prestamo.fechaPrestamo" type="date"><label for=""></label>
+        </div>
+
+        <div class="input-field">
+            HORA DE PRESTAMO:
+            <input [(ngModel)]="prestamo.horaPrestamo" type="time"><label for=""></label>
+        </div>
+
+        <div class="input-field">
+            OBSERVACIONES:
+            <input [(ngModel)]="prestamo.observacion" type="text"><label for=""></label>
+        </div>
+    </div>
+</div>
+
+<!--LISTA REGRESAR LIBRO-->
+<div id="modalPrestamosRegresar" class="modal">
+    <div class="modal-content">
+        <div class="input-field">
+            HORA DE DEVOLUCIÓN:
+            <input [(ngModel)]="prestamo.horaDevolucion" type="time"><label for=""></label>
+        </div>
+        <div class="input-field">
+            COMENTARIOS DE DEVOLUCION:
+            <input [(ngModel)]="prestamo.comentarios" type="text"><label for=""></label>
+        </div>
+
+        <div class="modal-footer">
+            <a (click)="devolverLibro()" class="btn col l12 s12 m12 btnLogin modal-close">REGRESAR</a>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+
+
+
+
+<!------------------------------------------------------------------------------------------------------------>
+
+<div class="bodyLoginencargado">
+    <!DOCTYPE html>
+    <html>
+
+
+    <head>
+        <meta charset="utf-8" />
+        <link href="prestamos.component.css" rel="stylesheet" type="text/css" />
+    </head>
+
+    </html>
+    <div *ngIf="this.rol==2">
+        <nav>
+            <div class="nav-wrapperencargado">
+                <a class="brand-logo" class="material-icons prefix">PRESTAMOS attach_file</a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li> <a href="home/prestamos" (click)="regresar()"
+                            class="btn-large waves-effect waves-heavy orange lighten-2 modal-trigger"
+                            class="material-icons prefix">home</a></li>
+
+                    <li><a data-target="modalPrestamosAgregar"
+                            class="btn-large waves-effect waves-heavy  green darken-2 modal-trigger"
+                            (click)="agregarNuevo(prestamo.id)">AGREGAR PRESTAMO</a></li>
+
+                </ul>
+            </div>
+        </nav>
+
+
+
+        <table class="centered">prestamo
+            <tr>
+                <th>ID</th>
+                <th>LIBRO</th>
+                <th>ESTUDIANTE</th>
+                <th>CANTIDAD DE LIBROS</th>
+                <th>FECHA DE PRESTAMO</th>
+                <th>HORA DEL PRESTAMO</th>
+                <th>OBSERVACIONES</th>
+                <th>HORA DE DEVOLUCIÓN</th>
+                <th>COMENTARIOS</th>
+                <th>ACCIONES</th>
+            </tr>
+            <tr *ngFor="let prestamo of prestamos">
+                <td> {{prestamo.id}}</td>
+                <td>
+                    <div *ngFor="let libro of libros">
+                <td *ngIf="prestamo.id_libro == libro.id">{{libro.titulo}}</td>
+    </div>
+    </td>
+    <td>
+        <div *ngFor="let estudiante of estudiantes">
+    <td *ngIf="prestamo.id_estudiante == estudiante.id">{{estudiante.nombre}}</td>
+</div>
+</td>
+
+<td>{{prestamo.cantidadLibros}}</td>
+<td>{{prestamo.fechaPrestamo}}</td>
+<td>{{prestamo.horaPrestamo}}</td>
+<td>{{prestamo.observacion}}</td>
+<td>{{prestamo.horaDevolucion}}</td>
+<td>{{prestamo.comentarios}}</td>
+<td><!--<a class="btn modal-trigger" (click)="eliminarPrestamo(prestamo.id)"><i class="material-icons prefix">delete</i></a>-->
+    <!-- <a   data-target="modalPrestamosEdit" class="btn modal-trigger" (click)="editarPrestamo(prestamo.id)"><i class="material-icons prefix">edit</i></a>-->
+    <!-- <a data-target="modalPrestamosVisualizar" class="btn modal-trigger" (click)="visualizarPrestamo(prestamo.id)"><i class="material-icons prefix">remove_red_eye</i></a>-->
+    <a data-target="modalPrestamosRegresar" class="btn modal-trigger" (click)="regresarLibro(prestamo.id)">DEVOLVER</a>
+
+</td>
+</tr>
+</table>
+
+<!--LISTA PARA AGREGAR PRESTAMO-->
+<div id="modalPrestamosAgregar" class="modal">
+    <div class="modal-content">
+
+        <h4>DATOS DEL PRESTAMO PARA INGRESAR</h4>
+        <div class="input-field">
+            LISTA DE LIBROS:
+            <select [(ngModel)]="prestamo.id_libro" class="browser-default">
+
+                <option *ngFor="let libro of libros" [value]="libro.id" for="">{{libro.id}}-{{libro.titulo}}</option>
+
+            </select>
+
+            <!--<input [(ngModel)]="prestamo.id_libro" type="number"><label for="">ID_LIBRO</label>-->
+        </div>
+
+        <div class="input-field">
+            LISTA DE ESTUDIANTES:
+            <select [(ngModel)]="prestamo.id_estudiante" class="browser-default">
+
+                <option *ngFor="let estudiante of estudiantes" [value]="estudiante.id" for=" ">
+                    {{estudiante.id}}-{{estudiante.nombre}}</option>
+
+            </select>
+            <!--<input [(ngModel)]="prestamo.id_estudiante" type="number"><label for="">ID_ESTUDIANTE</label>-->
+
+        </div>
+
+        <div class="input-field">
+            CANTIDAD DE LIBROS:
+            <input [(ngModel)]="prestamo.cantidadLibros" type="number"><label for=""></label>
+        </div>
+
+        <div class="input-field">
+            FECHA DE PRESTAMO:
+            <input [(ngModel)]="prestamo.fechaPrestamo" type="date"><label for=""></label>
+        </div>
+
+        <div class="input-field">
+            HORA DE PRESTAMO:
+            <input [(ngModel)]="prestamo.horaPrestamo" type="time"><label for=""></label>
+        </div>
+
+        <div class="input-field">
+            OBSERVACIONES:
+            <input [(ngModel)]="prestamo.observacion" type="text"><label for=""></label>
+        </div>
+
+        <div class="modal-footer">
+            <a class="btn col l12 s12 m12 btnLogin modal-close" (click)="agregarPrestamo()"> INSERTAR </a>
+        </div>
+    </div>
+</div>
+
+
+<!--LISTA PARA EDITAR PRESTAMO-->
+<div id="modalPrestamosEdit" class="modal">
+    <div class="modal-content">
+
+        <h4>DATOS DE PRESTAMO A EDITAR</h4>
+        <div class="input-field">
+            LISTA DE LIBROS:
+            <select [(ngModel)]="prestamo.id_libro" class="browser-default">
+
+                <option *ngFor="let libro of libros" [value]="libro.id" for="">{{libro.id}}-{{libro.titulo}}</option>
+
+            </select>
+
+            <!--<input [(ngModel)]="prestamo.id_libro" type="number"><label for="">ID_LIBRO</label>-->
+        </div>
+
+        <div class="input-field">
+            LISTA DE ESTUDIANTES:
+            <select [(ngModel)]="prestamo.id_estudiante" class="browser-default">
+
+                <option *ngFor="let estudiante of estudiantes" [value]="estudiante.id" for=" ">
+                    {{estudiante.id}}-{{estudiante.nombre}}</option>
+
+            </select>
+            <!--<input [(ngModel)]="prestamo.id_estudiante" type="number"><label for="">ID_ESTUDIANTE</label>-->
+
+        </div>
+
+        <div class="input-field">
+            CANTIDAD DE LIBROS:
+            <input [(ngModel)]="prestamo.cantidadLibros" type="number"><label for=""></label>
+        </div>
+
+        <div class="input-field">
+            FECHA DE PRESTAMO:
+            <input [(ngModel)]="prestamo.fechaPrestamo" type="date"><label for=""></label>
+        </div>
+
+        <div class="input-field">
+            HORA DE PRESTAMO:
+            <input [(ngModel)]="prestamo.horaPrestamo" type="time"><label for=""></label>
+        </div>
+
+        <div class="input-field">
+            OBSERVACIONES:
+            <input [(ngModel)]="prestamo.observacion" type="text"><label for=""></label>
+        </div>
+
+        <div class="modal-footer">
+            <a (click)="actualizarPrestamo()" class="btn col l12 s12 m12 btnLogin modal-close">ACTUALIZAR</a>
+        </div>
+    </div>
+
+</div>
+
+
+<!--LISTA REGRESAR LIBRO-->
+<div id="modalPrestamosRegresar" class="modal">
+    <div class="modal-content">
+        <div class="input-field">
+            HORA DE DEVOLUCIÓN:
+            <input [(ngModel)]="prestamo.horaDevolucion" type="time"><label for=""></label>
+        </div>
+        <div class="input-field">
+            COMENTARIOS DE DEVOLUCION:
+            <input [(ngModel)]="prestamo.comentarios" type="text"><label for=""></label>
+        </div>
+
+        <div class="modal-footer">
+            <a (click)="devolverLibro()" class="btn col l12 s12 m12 btnLogin modal-close">REGRESAR</a>
+        </div>
+    </div>
+</div>
+</div>
+</div>

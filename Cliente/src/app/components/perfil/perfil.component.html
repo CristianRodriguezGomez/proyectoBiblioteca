@@ -1,0 +1,58 @@
+<div class="bodyLoginadmin">
+
+    <!DOCTYPE html>
+    <html>
+    
+    
+    <head>
+        <meta charset="utf-8" />
+        <link href="perfil.component.css" rel="stylesheet" type="text/css" />
+    </head>
+    
+    </html>
+
+    <tr><a  class="brand-logo center" class="material-icons prefix" >MI PERFIL  person</a>
+    </tr>
+    
+    
+    <img  [src]="dameNombre(idUsuario)" (error)="onImgError($event)"  >
+    
+    <div>
+        <input type="file" (change)="cargandoImagen($event.target,'perfil')" multiple>
+    </div>
+
+    <tr>
+        <th>EMAIL</th>
+        <th>NOMBRE</th>
+        <th>TELEFONO</th>
+        
+    </tr>
+  
+    </div>    
+
+
+<!--  
+ <table class="centered">
+
+    
+
+    <tr>
+        <th>ID</th>
+        <th>EMAIL</th>
+        <th>NOMBRE</th>
+        <th>TELEFONO</th>
+        <th>ROL</th>
+        <th>ACCIONES</th>
+    </tr>
+   <tr *ngFor="let usuario of usuarios">
+    <td> {{usuario.id}}</td>
+        <td>{{usuario.email}}</td>
+        <td>{{usuario.nombre}}</td>
+        <td>{{usuario.telefono}}</td>
+        <td>{{usuario.rol}}</td>
+    <td><a   class="btn modal-trigger"  (click)="eliminarUsuario(usuario.id)"><i class="material-icons prefix">delete</i></a>
+        <a  data-target="modalUsuarios1" class="btn modal-trigger" (click)="editarUsuario(usuario.id)"><i class="material-icons prefix">edit</i></a></td>  
+
+      
+</tr>
+</table> -->

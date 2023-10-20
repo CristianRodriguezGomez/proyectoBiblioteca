@@ -1,0 +1,16 @@
+body {
+    display: flex;
+    min-height: 50vh;
+    flex-direction: column;
+  }
+
+  main {
+    flex: 1 0 auto;
+  }
+.responsive-img{
+  max-width: 100%;
+  height:auto;
+}
+.color{
+  color: bisque;
+}

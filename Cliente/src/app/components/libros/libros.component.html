@@ -1,0 +1,314 @@
+<div class="bodyLoginadmin">
+    <!DOCTYPE html>
+    <html>
+
+
+    <head>
+        <meta charset="utf-8" />
+        <link href="libros.component.css" rel="stylesheet" type="text/css" />
+    </head>
+
+    </html>
+    <div *ngIf="this.rol==1" id="datosLibros">
+
+        <nav >
+            <div class="nav-wrapperadmin">
+                <a class="brand-logo" class="material-icons prefix">LIBROS collections_bookmark</a>
+              
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li><input (change)="cargarExcelLibros($event)" type="file"></li>
+
+                    <li> <a (click)="regresar()"
+                            class="btn-large waves-effect waves-heavy orange lighten-2 modal-trigger"
+                            class="material-icons prefix">home</a></li>
+                         <li>  <div *ngIf="libros!=undefined" class="center ">
+                                <button (click)="exportAsXLSX()"><img  alt="EXCEL"  src="{{liga}}/excel.png" style="width:25px;height:25px;"></button>
+                            </div>
+
+                        </li>
+
+                       
+                                
+                    <li><a data-target="modal1" class="btn-large waves-effect waves-heavy green darken-2 modal-trigger"
+                            (click)="agregarNuevo(libro.id)">AGREGAR LIBRO</a></li>
+                           
+                </ul>
+             
+            </div>
+           
+        </nav>
+
+
+
+
+        <table class="centered" id="datosLibros">
+
+            <tr>
+                <th>ID</th>
+                <th>TITULO</th>
+                <th>AUTOR</th>
+                <th>LIBROS DISPONIBLES</th>
+                <th>EDITORIAL</th>
+                <th>ÁREA</th>
+                <th>ACCIONES</th>
+            </tr>
+            <tr *ngFor="let libro of libros |paginate: {itemsPerPage: pageSize,currentPage: p};let i=index">
+                <td>{{libro.id}}</td>
+                <td>{{libro.titulo}}</td>
+                <td>{{libro.autor}}</td>
+                <td>{{libro.disponibles}}</td>
+                <td>{{libro.editorial}}</td>
+                <td>{{libro.area}}</td>
+                <td><a class="btn modal-trigger" (click)="eliminarLibro(libro.id)"><i
+                            class="material-icons prefix">delete</i></a>
+                    <a data-target="modal2" class="btn modal-trigger" (click)="editarLibro(libro.id)"><i
+                            class="material-icons prefix">edit</i></a>
+                </td>
+
+
+            </tr>
+        </table>
+
+       
+        <style>
+            .my-pagination ::ng-deep .ngx-pagination  {
+              background: linear-gradient(rgb(108, 163, 195),rgb(108, 163, 195));
+            }
+            .my-pagination ::ng-deep .ngx-pagination .current{
+                background-color: rgb(108, 163, 195);
+              color: black;
+            }
+            </style>
+    <div class="center-align" id="paginacion">
+        <pagination-controls class="my-pagination" (pageChange)="p = ($event)" previousLabel="Anterior"
+            nextLabel="Siguiente" >
+        </pagination-controls>
+    </div>
+
+
+
+
+        <div id="modal1" class="modal">
+            <div class="modal-content">
+
+                <h4>DATOS DE LIBRO A INGRESAR</h4>
+                <div class="input-field">
+                    TITULO:
+                    <input [(ngModel)]="libro.titulo" type="text"><label for=""></label>
+                </div>
+
+
+                <div class="input-field">
+                    AUTOR:
+                    <input [(ngModel)]="libro.autor" type="text"><label for=""></label>
+                </div>
+
+                <div class="input-field">
+                    LIBROS DISPONIBLES:
+                    <input [(ngModel)]="libro.disponibles" type="number"><label for=""></label>
+                </div>
+
+                <div class="input-field">
+                    EDITORIAL:
+                    <input [(ngModel)]="libro.editorial" type="text"><label for=""></label>
+                </div>
+
+
+                <div class="input-field">
+                    ÁREA:
+                    <input [(ngModel)]="libro.area" type="text"><label for=""></label>
+                </div>
+
+
+                <div class="modal-footer">
+                    <a class="btn col l12 s12 m12 btnLogin modal-close" (click)="agregarLibro()">INSERTAR </a>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div id="modal2" class="modal">
+            <div class="modal-content">
+                <h4>DATOS DEL LIBRO A EDITAR</h4>
+                <div class="input-field">
+                    TITULO:
+                    <input [(ngModel)]="libro.titulo" type="text"><label for=""></label>
+                </div>
+
+
+                <div class="input-field">
+                    AUTOR:
+                    <input [(ngModel)]="libro.autor" type="text"><label for=""></label>
+                </div>
+
+                <div class="input-field">
+                    LIBROS DISPONIBLES:
+                    <input [(ngModel)]="libro.disponibles" type="number"><label for=""></label>
+                </div>
+
+                <div class="input-field">
+                    EDITORIAL:
+                    <input [(ngModel)]="libro.editorial" type="text"><label for=""></label>
+                </div>
+
+
+                <div class="input-field">
+                    ÁREA:
+                    <input [(ngModel)]="libro.area" type="text"><label for=""></label>
+                </div>
+
+
+                <div class="modal-footer">
+                    <a (click)="actualizarlibro()" class="btn col l12 s12 m12 btnLogin">ACTUALIZAR</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!------------------------------------------------------------------------------------------>
+<div class="bodyLoginencargado">
+    <!DOCTYPE html>
+    <html>
+
+
+    <head>
+        <meta charset="utf-8" />
+        <link href="libros.component.css" rel="stylesheet" type="text/css" />
+    </head>
+
+    </html>
+    <div *ngIf="this.rol==2">
+
+        <nav>
+            <div class="nav-wrapperencargado">
+                <a class="brand-logo" class="material-icons prefix">LIBROS collections_bookmark</a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li> <a (click)="regresar()"
+                            class="btn-large waves-effect waves-heavy orange lighten-2 modal-trigger"
+                            class="material-icons prefix">home</a></li>
+                    <li><a data-target="modal3" class="btn-large waves-effect waves-heavy  green darken-2 modal-trigger"
+                            (click)="agregarNuevo(libro.id)">AGREGAR LIBRO</a></li>
+
+                </ul>
+
+            </div>
+        </nav>
+
+
+
+
+
+        <table class="centered" id="datosLibros">
+
+            <tr>
+
+                <th>ID</th>
+                <th>TITULO</th>
+                <th>AUTOR</th>
+                <th>LIBROS DISPONIBLES</th>
+                <th>EDITORIAL</th>
+                <th>AREA</th>
+                <th>ACCIONES</th>
+
+            </tr>
+            <tr *ngFor="let libro of libros">
+                <td>{{libro.id}}</td>
+                <td>{{libro.titulo}}</td>
+                <td>{{libro.autor}}</td>
+                <td>{{libro.disponibles}}</td>
+                <td>{{libro.editorial}}</td>
+                <td>{{libro.area}}</td>
+                <td><!--<a class="btn modal-trigger" (click)="eliminarLibro(libro.id)"><i class="material-icons prefix">delete</i></a>-->
+                    <a data-target="modal4" class="btn modal-trigger" (click)="editarLibro(libro.id)"><i
+                            class="material-icons prefix">edit</i></a>
+                </td>
+
+
+            </tr>
+
+            <div *ngIf="libros!=undefined" class="center ">
+                <button (click)="exportAsXLSX()"><img src="{{liga}}/excel.png" style="width:50px;height:50px;"></button>
+            </div>
+        </table>
+
+
+
+        <div id="modal3" class="modal">
+            <div class="modal-content">
+
+                <h4>DATOS DE LIBRO A INGRESAR</h4>
+                <div class="input-field">
+                    TITULO:
+                    <input [(ngModel)]="libro.titulo" type="text"><label for=""></label>
+                </div>
+
+
+                <div class="input-field">
+                    AUTOR:
+                    <input [(ngModel)]="libro.autor" type="text"><label for=""></label>
+                </div>
+
+                <div class="input-field">
+                    LIBROS DISPONIBLES:
+                    <input [(ngModel)]="libro.disponibles" type="number"><label for=""></label>
+                </div>
+
+                <div class="input-field">
+                    EDITORIAL:
+                    <input [(ngModel)]="libro.editorial" type="text"><label for=""></label>
+                </div>
+
+
+                <div class="input-field">
+                    ÁREA:
+                    <input [(ngModel)]="libro.area" type="text"><label for=""></label>
+                </div>
+
+
+                <div class="modal-footer">
+                    <a class="btn col l12 s12 m12 btnLogin modal-close" (click)="agregarLibro()">INSERTAR </a>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div id="modal4" class="modal">
+            <div class="modal-content">
+                <h4>DATOS DEL LIBRO A EDITAR</h4>
+                <div class="input-field">
+                    TITULO:
+                    <input [(ngModel)]="libro.titulo" type="text"><label for=""></label>
+                </div>
+
+
+                <div class="input-field">
+                    AUTOR:
+                    <input [(ngModel)]="libro.autor" type="text"><label for=""></label>
+                </div>
+
+                <div class="input-field">
+                    LIBROS DISPONIBLES:
+                    <input [(ngModel)]="libro.disponibles" type="number"><label for=""></label>
+                </div>
+
+                <div class="input-field">
+                    EDITORIAL:
+                    <input [(ngModel)]="libro.editorial" type="text"><label for=""></label>
+                </div>
+
+
+                <div class="input-field">
+                    ÁREA:
+                    <input [(ngModel)]="libro.area" type="text"><label for=""></label>
+                </div>
+
+
+                <div class="modal-footer">
+                    <a (click)="actualizarlibro()" class="btn col l12 s12 m12 btnLogin modal-close">ACTUALIZAR</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
